@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VAERO | Hub</title>
+<title>VAERO | Atmosphere Hub</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
 
@@ -12,9 +12,33 @@
 
 body{
   min-height:100vh;
-  background:linear-gradient(135deg,#07111d,#18314a 55%,#384b61);
+  background:
+    radial-gradient(circle at 50% 20%,rgba(230,215,176,.14),transparent 28%),
+    linear-gradient(135deg,#07111d,#18314a 55%,#384b61);
   color:white;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  overflow:hidden;
+}
+
+.intro-screen{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,#07111d,#101d2c 60%,#25384f);
+  z-index:10;
+  animation:introFade 2.4s ease forwards;
+}
+
+.intro-logo{
+  font-family:"Oswald",Arial,sans-serif;
+  font-size:48px;
+  letter-spacing:8px;
+  color:#e6d7b0;
+  opacity:0;
+  transform:translateY(12px);
+  animation:logoIn 1.4s ease forwards;
 }
 
 .wrap{
@@ -23,6 +47,9 @@ body{
   align-items:center;
   justify-content:center;
   padding:40px 6%;
+  opacity:0;
+  animation:pageIn 1s ease forwards;
+  animation-delay:2s;
 }
 
 .card{
@@ -30,7 +57,7 @@ body{
   max-width:520px;
   background:rgba(8,18,30,.82);
   border:1px solid rgba(255,255,255,.12);
-  border-radius:26px;
+  border-radius:28px;
   padding:36px 28px;
   box-shadow:0 24px 80px rgba(0,0,0,.35);
 }
@@ -39,7 +66,7 @@ body{
   font-family:"Oswald",Arial,sans-serif;
   font-size:42px;
   letter-spacing:6px;
-  margin-bottom:12px;
+  margin-bottom:10px;
 }
 
 .kicker{
@@ -68,10 +95,15 @@ p{
   width:100%;
   text-align:center;
   text-decoration:none;
-  border-radius:14px;
-  padding:17px 20px;
+  border-radius:15px;
+  padding:18px 20px;
   margin-top:14px;
   font-size:15px;
+  transition:.25s ease;
+}
+
+.btn:active{
+  transform:scale(.98);
 }
 
 .primary{
@@ -92,36 +124,68 @@ p{
   color:rgba(255,255,255,.45);
   line-height:21px;
 }
+
+@keyframes logoIn{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes introFade{
+  0%{opacity:1}
+  70%{opacity:1}
+  100%{
+    opacity:0;
+    visibility:hidden;
+  }
+}
+
+@keyframes pageIn{
+  to{opacity:1}
+}
 </style>
 </head>
 
 <body>
+
+<div class="intro-screen">
+  <div class="intro-logo">VAERO</div>
+</div>
 
 <div class="wrap">
   <div class="card">
     <div class="logo">VAERO</div>
     <div class="kicker">ATMOSPHERE HUB</div>
 
-    <h1>VAERO devam eder.</h1>
+    <h1>Atmosfer devam ediyor.</h1>
 
     <p>
-      Atmosferini yenilemek, yeni koku seçeneklerini görmek
-      veya VAERO dünyasını takip etmek için seçim yap.
+      Koku yenileme, özel seçenekler ve VAERO dünyası için devam et.
     </p>
 
-    <a class="btn primary" href="#" onclick="alert('Koku yenileme sayfası yakında eklenecek.'); return false;">
-  Atmosferimi yenile
-</a>
+    <a class="btn primary" href="#" onclick="softAction('Koku yenileme sayfası yakında eklenecek.'); return false;">
+      Atmosferimi yenile
+    </a>
 
-    <a class="btn secondary" href="#" onclick="alert('Instagram sayfası yakında eklenecek.'); return false;">
-  VAERO’yu Instagram’da keşfet
-</a>
+    <a class="btn secondary" href="#" onclick="softAction('Instagram sayfası yakında eklenecek.'); return false;">
+      VAERO’yu keşfet
+    </a>
 
     <div class="note">
-      Koku yenileme ve özel fırsatlar WhatsApp üzerinden netleştirilir.
+      QR kod kalıcıdır. Bağlantılar zamanla güncellenebilir.
     </div>
   </div>
 </div>
+
+<script>
+function softAction(message){
+  if(navigator.vibrate){
+    navigator.vibrate(18);
+  }
+  alert(message);
+}
+</script>
 
 </body>
 </html>
